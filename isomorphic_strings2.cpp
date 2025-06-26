@@ -1,25 +1,14 @@
 #include<bits/stdc++.h>
 using namespace std;
 
-bool isIsomorphic(string s, string t){
-    if (s.length() != t.length()) return false;
-    unordered_map<char, char> mapST;
-    unordered_map<char, char> mapTS;
-    for (int i = 0; i < s.length(); ++i){
-        char chS = s[i];
-        char chT = t[i];
-        if (mapST.count(chS)){
-            if (mapST[chS] != chT) return false;
-        } 
-        else{
-            mapST[chS] = chT;
-        }
-        if (mapTS.count(chT)){
-            if (mapTS[chT] != chS) return false;
-        }
-        else{
-            mapTS[chT] = chS;
-        }
+bool isIsomorphic(string s, string t) {
+    if (s.size() != t.size()) return false;
+    int mapS[256] = {0};
+    int mapT[256] = {0};
+    for (int i = 0; i < s.size(); ++i) {
+        if (mapS[s[i]] != mapT[t[i]]) return false;
+        mapS[s[i]] = i + 1;
+        mapT[t[i]] = i + 1;
     }
     return true;
 }
